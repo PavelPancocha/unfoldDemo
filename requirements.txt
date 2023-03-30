@@ -1,0 +1,8 @@
+django
+django-fsm
+django-fsm-admin
+django-extensions
+django-leaflet
+factory-boy
+django-unfold
+psycopg2-binary

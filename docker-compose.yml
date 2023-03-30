@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgis/postgis:14-3.2
+    environment:
+      POSTGRES_DB: unfold
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres!
+    volumes:
+      - postgres_data_unfold:/var/lib/postgresql/data/
+
+  app:
+    build: .
+    command: >
+      bash -c "
+        python manage.py migrate &&
+        python manage.py create_demo_data &&
+        python manage.py runserver0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_DB: unfold
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres!
+    depends_on:
+      - db
+
+volumes:
+  postgres_data_unfold:
