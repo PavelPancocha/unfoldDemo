@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from unfold.factories import OrgFactory, CarFactory
+from app.factories import OrgFactory, CarFactory
 
 class Command(BaseCommand):
     help = 'Create demo data for the application'
