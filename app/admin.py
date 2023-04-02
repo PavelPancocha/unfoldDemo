@@ -1,16 +1,15 @@
 from random import choice
 
 from django.contrib import admin
+from django.contrib.auth.admin import GroupAdmin, UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group, User
-
 from django.contrib.gis.admin import GISModelAdmin
+from fsm_admin.mixins import FSMTransitionMixin
 from unfold.admin import ModelAdmin
 from unfold.decorators import action, display
 from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 
 from .models import Car, Org
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.admin import GroupAdmin
 
 
 @admin.register(Org)
@@ -21,9 +20,10 @@ class OrgAdmin(ModelAdmin):
 
 
 @admin.register(Car)
-class CarAdmin(ModelAdmin, GISModelAdmin):
+class CarAdmin(FSMTransitionMixin, ModelAdmin, GISModelAdmin):
     list_display = ("heading", "show_status", "owner")
     search_fields = ("name", "brand", "owner__username")
+    autocomplete_fields = ("owner",)
 
     @display(header=True)
     def heading(self, obj):
@@ -61,6 +61,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     change_password_form = AdminPasswordChangeForm
+    search_fields = ("username", "first_name", "last_name", "email")
 
 
 admin.site.unregister(Group)

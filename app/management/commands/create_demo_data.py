@@ -1,16 +1,21 @@
-from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from app.factories import OrgFactory, CarFactory
+from django.core.management.base import BaseCommand
+
+from app.factories import CarFactory, OrgFactory
+
 
 class Command(BaseCommand):
     help = 'Create demo data for the application'
 
     def handle(self, *args, **options):
         # Create 2 Orgs
-        OrgFactory.create_batch(2)
+        orgs = OrgFactory.create_batch(3)
+        self.stdout.write(self.style.SUCCESS('Orgs created'))
 
         # Create 4 Cars with assigned Orgs and Owners
-        CarFactory.create_batch(4)
+        for org in orgs:
+            CarFactory.create_batch(5, org=org)
+        self.stdout.write(self.style.SUCCESS('Cars created'))
 
         # Create superuser if not already exists
         if not User.objects.filter(username='admin').exists():

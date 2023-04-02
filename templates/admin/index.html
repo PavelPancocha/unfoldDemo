@@ -1,0 +1,62 @@
+{% extends 'unfold/layouts/base_simple.html' %}
+
+{% load cache i18n %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} |
+  {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+  <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Unfold custom dashboard') }}</a></h1>
+{% endblock %}
+
+{% block content %}
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.0/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Sample line graph styling */
+    .line-graph {
+      height: 200px;
+      position: relative;
+    }
+
+    .line-graph .line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 2px solid blue;
+      transform-origin: bottom;
+      animation: draw 2s linear forwards;
+    }
+  </style>
+  <div class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Vehicle Count -->
+    <div class="bg-white shadow p-4 rounded">
+      <h2 class="text-gray-700 text-sm">Total Vehicles</h2>
+      <p class="text-2xl font-semibold">1,000</p>
+    </div>
+    <!-- Active Users Count -->
+    <div class="bg-white shadow p-4 rounded">
+      <h2 class="text-gray-700 text-sm">Active Users</h2>
+      <p class="text-2xl font-semibold">500</p>
+    </div>
+  </div>
+  <!-- Simple Line Graph -->
+  <div class="bg-white shadow p-4 rounded mt-4">
+    <h2 class="text-gray-700 text-sm">Reservation Count</h2>
+    <div class="line-graph">
+      <div class="line" style="width: 10%; transform: scaleY(0.5);"></div>
+      <div class="line" style="width: 20%; transform: scaleY(0.8);"></div>
+      <div class="line" style="width: 30%; transform: scaleY(0.6);"></div>
+      <div class="line" style="width: 40%; transform: scaleY(0.9);"></div>
+      <div class="line" style="width: 50%; transform: scaleY(0.7);"></div>
+      <div class="line" style="width: 60%; transform: scaleY(0.85);"></div>
+      <div class="line" style="width: 70%; transform: scaleY(0.4);"></div>
+      <div class="line" style="width: 80%; transform: scaleY(0.95);"></div>
+      <div class="line" style="width: 90%; transform: scaleY(0.3);"></div>
+      <div class="line" style="width: 100%; transform: scaleY(1);"></div>
+    </div>
+  </div>
+
+{% endblock %}

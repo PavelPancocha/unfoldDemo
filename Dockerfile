@@ -17,12 +17,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY . .
 
-# Copy the wait-for-postgres.sh script
-COPY wait-for-postgres.sh /app
-
-# Make the wait-for-postgres.sh script executable
-RUN chmod +x wait-for-postgres.sh
-
 # Expose the port on which the app will run
 EXPOSE 8000
 
