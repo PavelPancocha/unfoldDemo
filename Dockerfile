@@ -3,7 +3,7 @@ FROM python:3.11-bullseye
 
 # Install GDAL, PostgreSQL client, and other necessary packages for GeoDjango
 RUN apt-get update && \
-    apt-get install -y binutils libproj-dev gdal-bin postgresql-client
+    apt-get install -y binutils libproj-dev gdal-bin postgresql-client libpq-dev
 
 # Set the working directory
 WORKDIR /app
