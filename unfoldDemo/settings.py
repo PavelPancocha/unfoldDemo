@@ -33,8 +33,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "unfold",
-    "django_fsm",
-    "fsm_admin",
+    "unfold.contrib.filters",  # optional, if special filters are needed
+    "unfold.contrib.forms",  # optional, if special form elements are needed
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "app.apps.UnfoldAppConfig",
+    "reversion",
+    "reversion_compare"
     # "debug_toolbar",
 ]
 
@@ -134,6 +136,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+ADD_REVERSION_ADMIN = True
 
 if DEBUG:
     import socket  # only if you haven't already imported this
