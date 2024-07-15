@@ -20,7 +20,7 @@ class OrgAdmin(ModelAdmin):
 
 
 @admin.register(Car)
-class CarAdmin(FSMTransitionMixin, ModelAdmin, GISModelAdmin):
+class CarAdmin(ModelAdmin, GISModelAdmin):
     list_display = ("heading", "show_status", "owner")
     search_fields = ("name", "brand", "owner__username")
     autocomplete_fields = ("owner",)

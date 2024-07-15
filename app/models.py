@@ -17,6 +17,7 @@ class Car(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     org = models.ForeignKey(Org, on_delete=models.CASCADE)
     state = FSMField(default='available')
+    image = models.ImageField(upload_to='cars/', blank=True, null=True)
 
     def __str__(self):
         return self.name
